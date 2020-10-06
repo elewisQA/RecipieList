@@ -28,7 +28,7 @@ import lombok.ToString;
 public class Recipe {
 	@Id
 	@GeneratedValue
-	private long id; 	// Unique Identifier
+	private Long id; 	// Unique Identifier
 	
 	@Column(name = "recipe_name", unique = true)
 	private String name;
