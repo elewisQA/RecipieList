@@ -38,7 +38,7 @@ public class Ingredient {
 	private String unit;
 	
 	@Column
-	private float quantity;
+	private Float quantity;
 	
 	@ManyToOne	// There are many ingredients in a recipe
 	private Recipe recipe;
