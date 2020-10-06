@@ -1,11 +1,5 @@
 package com.qa.recipeLists.dto;
 
-//---[ Imports ]---
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.FetchType;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,6 +8,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 //---[ Class Definition ]---
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 public class IngredientDTO {
 	
 	private Long id;
