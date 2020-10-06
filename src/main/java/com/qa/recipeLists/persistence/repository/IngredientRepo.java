@@ -7,6 +7,6 @@ import com.qa.recipeLists.persistence.domain.Ingredient;
 
 //---[ Interface Definition ]---
 @Repository
-public interface IngredientRepo extends JpaRepository<Ingredient, Long>{
+public interface IngredientRepo extends JpaRepository<Ingredient, Long> {
 
 }
