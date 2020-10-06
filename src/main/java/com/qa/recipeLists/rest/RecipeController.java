@@ -28,6 +28,7 @@ public class RecipeController {
 	private RecipeService service;
 	
 	//--[ Class Constructor ]--
+	@Autowired
 	public RecipeController(RecipeService service) {
 		super();
 		this.service = service;
