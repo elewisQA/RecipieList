@@ -74,4 +74,99 @@ public class StepServiceUnitTest {
 		// Create Step DTO using Step with Id
 		this.dto = new ModelMapper().map(testStepId, StepDTO.class);
 	}
+	
+	@Test
+	void createTest() {
+		// Set-up testing conditions
+		when(this.modelMapper.map(mapToDTO(testStep), Step.class))
+		.thenReturn(testStep);
+		
+		when(this.repo.save(testStep))
+		.thenReturn(testStepId);
+		
+		when(this.modelMapper.map(testStepId, StepDTO.class))
+		.thenReturn(dto);
+		
+		// Test assertion
+		assertThat(this.dto).isEqualTo(this.service.create(testStep));
+		
+	}
+	
+	@Test
+	void readTest() {
+		// Set-up testing conditions
+		when(this.repo.findById(this.id))
+		.thenReturn(Optional.of(this.testStepId));
+		
+		when(this.modelMapper.map(testStepId, StepDTO.class))
+		.thenReturn(dto);
+		
+		// Test assertion
+		assertThat(this.dto).isEqualTo(this.service.read(this.id));
+		
+		// Check methods were called
+		verify(this.repo, times(1)).findById(this.id);
+	}
+	
+	@Test
+	void readAllTest() {
+		// Set-up testing conditions
+		when(repo.findAll())
+		.thenReturn(this.stepList);
+		
+		when(this.modelMapper.map(testStepId, StepDTO.class))
+		.thenReturn(dto);
+		
+		// Test assertion
+		assertThat(this.service.read().isEmpty()).isFalse();
+		
+		// Check methods were called
+		verify(repo, times(1)).findAll();
+	}
+	
+	@Test
+	void updateTest() {
+		// Set-up fake data
+		final Long ID = 1L;
+		StepDTO newStep = new StepDTO(null, "Step 2", "Add in flour");
+		
+		Step step = new Step("Step 2", "Add in flour");
+		step.setId(ID);;
+		
+		Step updatedStep = new Step(newStep.getName(), newStep.getDescription());
+		updatedStep.setId(ID);
+		
+		StepDTO updatedDTO = new StepDTO(ID, updatedStep.getName(), updatedStep.getDescription());
+	
+		// Set-up testing conditions
+		when(this.repo.findById(this.id))
+		.thenReturn(Optional.of(step));
+		
+		when(this.repo.save(updatedStep))
+		.thenReturn(updatedStep);
+		
+		when(this.modelMapper.map(updatedStep, StepDTO.class))
+		.thenReturn(updatedDTO);
+		
+		// Test assertion
+		assertThat(updatedDTO).isEqualTo(this.service.update(newStep, this.id));
+		
+		// Check methods were called
+		verify(this.repo, times(1)).findById(1L);
+		verify(this.repo, times(1)).save(updatedStep);
+	}
+	
+	@Test
+	void deleteTest() {
+		// Set-up testing conditions
+		when(this.repo.existsById(this.id))
+		.thenReturn(true, false);
+				
+		// Test assertions
+		assertThat(this.service.delete(id)).isTrue();
+				
+		// Check methods were called
+		verify(this.repo, times(1)).deleteById(this.id);
+		verify(this.repo, times(2)).existsById(this.id);
+	}
 }
