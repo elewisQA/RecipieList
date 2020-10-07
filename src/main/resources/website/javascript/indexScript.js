@@ -48,7 +48,7 @@ function createRecipe(recipe) {
     let editButton = document.createElement("a");
     editButton.setAttribute("class", "btn btn-warning");
     editButton.setAttribute("id", "editRecipe-" + id);
-    editButton.setAttribute("href", "recipeUpdate.html/" + id);
+    editButton.setAttribute("href", "recipeUpdate.html?id=" + id);
     editButton.innerHTML = "Edit";
     let delButton  = document.createElement("a");
     delButton.setAttribute("class", "btn btn-danger");
@@ -133,7 +133,7 @@ function createIngredients(ingredientCol, ingredients) {
         let edit = document.createElement("td");
         let editButton = document.createElement("a");
         editButton.setAttribute("class", "btn btn-warning");
-        editButton.setAttribute("href", "ingredientUpdate.html/" + i.id);
+        editButton.setAttribute("href", "ingredientUpdate.html?id=" + i.id);
         editButton.innerHTML = "Edit";
         edit.appendChild(editButton);
         let del = document.createElement("td");
@@ -198,7 +198,7 @@ function createSteps(stepCol, steps) {
         let edit = document.createElement("td");
         let editButton = document.createElement("a");
         editButton.setAttribute("class", "btn btn-warning");
-        editButton.setAttribute("href", "stepUpdate.html/" + i.id);
+        editButton.setAttribute("href", "stepUpdate.html?id=" + i.id);
         editButton.innerHTML = "Edit";
         edit.appendChild(editButton);
         let del = document.createElement("td");
