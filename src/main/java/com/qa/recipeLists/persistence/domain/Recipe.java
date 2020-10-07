@@ -4,6 +4,7 @@ package com.qa.recipeLists.persistence.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,10 +34,10 @@ public class Recipe {
 	@Column(name = "recipe_name", unique = true)
 	private String name;
 	
-	@OneToMany(mappedBy = "recipe")	// A recipe has many ingredients
+	@OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)	// A recipe has many ingredients
 	private List<Ingredient> ingredients = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "recipe")	// A recipe has many steps
+	@OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)	// A recipe has many steps
 	private List<Step> steps = new ArrayList<>();
 	
 	// Name-only Constructor
