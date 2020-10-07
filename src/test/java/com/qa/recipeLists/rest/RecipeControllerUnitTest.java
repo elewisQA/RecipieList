@@ -1,5 +1,6 @@
 package com.qa.recipeLists.rest;
 
+//---[ Imports ]---
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -19,9 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.qa.recipeLists.dto.RecipeDTO;
-import com.qa.recipeLists.persistence.domain.Ingredient;
 import com.qa.recipeLists.persistence.domain.Recipe;
-import com.qa.recipeLists.persistence.domain.Step;
 import com.qa.recipeLists.service.RecipeService;
 
 //---[ Testing Code ]---
