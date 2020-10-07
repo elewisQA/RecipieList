@@ -21,7 +21,7 @@ import com.qa.recipeLists.service.StepService;
 
 //---[ Controller Definition ]---
 @RestController
-@RequestMapping("/step") // Map to '/step' destination of URL
+@RequestMapping("/Step") // Map to '/step' destination of URL
 public class StepController {
 	
 	//--[ Class Variables ]--
