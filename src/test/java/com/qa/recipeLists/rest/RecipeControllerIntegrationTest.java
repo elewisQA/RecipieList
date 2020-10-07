@@ -2,12 +2,10 @@ package com.qa.recipeLists.rest;
 
 //---[ Imports ]---
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +19,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.recipeLists.dto.RecipeDTO;
 import com.qa.recipeLists.persistence.domain.Recipe;
 import com.qa.recipeLists.persistence.repository.RecipeRepo;
-import com.qa.recipeLists.service.RecipeService;
 
 //---[ Testing Code ]---
 @SpringBootTest
