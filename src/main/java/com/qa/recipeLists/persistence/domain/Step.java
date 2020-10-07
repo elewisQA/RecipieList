@@ -39,4 +39,10 @@ public class Step {
 	
 	@ManyToOne	// There are many ingredients in a recipe
 	private Recipe recipe;
+	
+	public Step(String name, String description) {
+		super();
+		this.setName(name);
+		this.setDescription(description);
+	}
 }

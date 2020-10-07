@@ -42,4 +42,11 @@ public class Ingredient {
 	
 	@ManyToOne	// There are many ingredients in a recipe
 	private Recipe recipe;
+	
+	public Ingredient(String name, String unit, Float quantity) {
+		super();
+		this.setName(name);
+		this.setUnit(unit);
+		this.setQuantity(quantity);
+	}
 }
