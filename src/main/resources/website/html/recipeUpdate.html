@@ -8,7 +8,7 @@
 
         <!-- Styling -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/reicpeUpdateStyling.css">
+        <link rel="stylesheet" href="../css/recipeUpdateStyling.css">
     </head>
     <body>
         <noscript>
@@ -53,6 +53,13 @@
                     <tbody id="ingredient-table-body">
 
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <a class="btn btn-danger" href="#" id="ingredient-add">Add</a>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <!-- Steps Row -->
@@ -72,11 +79,18 @@
                     <tbody id="step-table-body">
 
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <a class="btn btn-danger" href="#" id="step-add">Add</a>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
         <!-- Javascript - Fetch -->
-        <script src="../javascript/indexScript.js">
+        <script src="../javascript/recipeUpdate.js">
         </script>
         <!-- Javascript - Boostrap -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 

@@ -70,6 +70,7 @@ function buildIngredientsTable(ingredients) {
         save.setAttribute("class", "btn btn-warning");
         save.setAttribute("href", "#");
         save.innerHTML = "Update";
+        updateIngredientListener(save, name, qty, unit, i.id);
         tr.appendChild(save);
         tableBody.appendChild(tr);
     }
@@ -99,6 +100,7 @@ function buildStepsTable(steps) {
         save.setAttribute("class", "btn btn-warning");
         save.setAttribute("href", "#");
         save.innerHTML = "Update";
+        updateStepListener(save, name, description, s.id);
         tr.appendChild(save);
         tableBody.appendChild(tr);
     }
@@ -108,7 +110,7 @@ function addNewEntry() {
 
 }
 
-function updateIngredientListener(button, name, quantity, unit, id, type) {
+function updateIngredientListener(button, name, quantity, unit, id) {
     // Format Data from fields
     let dataToPost = {
         "id": id,
@@ -119,9 +121,51 @@ function updateIngredientListener(button, name, quantity, unit, id, type) {
 
     // Send Update Request
     button.onclick = function() {
-        let url = "http://localhost:1337/" + type + "/update/" + id;
+        
+        let updateURL = "http://localhost:1337/ingredient/update/" + id;
+        console.log("URL:" + updateURL);
         fetch(url, {
-            method: 'put'
+            method: 'put',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body:json = JSON.stringify(dataToPost)
+        })
+        .then(JSON)
+        .then(function (data) {
+            console.log('Request succeeded with JSON response: ', data);
+        })
+        .catch(function (err) {
+            console.log("Request failed: ", err);
+        })
+    }
+}
+
+function updateStepListener(button, name, description, id) {
+    // Format Data from fields
+    let dataToPost = {
+        "id": id,
+        "name": name.innerHTML,
+        "description": description.innerHTML
+    }
+    
+    // Send Update Request
+    button.onclick = function() {
+        let updateURL = "http://localhost:1337/step/update/" + id;
+        console.log("URL: " + updateURL);
+        fetch(updateURL, {
+            method: 'put',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body:json = JSON.stringify(dataToPost)
+        })
+        .then(JSON)
+        .then(function (data) {
+            console.log('Request succeeded with JSON response: ', data);
+        })
+        .catch(function (err) {
+            console.log("Request failed: ", err);
         })
     }
 }
