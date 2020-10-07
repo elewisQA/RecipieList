@@ -10,14 +10,19 @@ div#header {
     background-color: rgb(255, 102, 102);
 }
 
-div#body {
-    background-color: rgb(179, 179, 179);
-}
-
 div#footer {
     background-color: rgb(255, 102, 102);
 }
 
-div.col-2, div.col-3 {
-    background-color: rgb(242, 242, 242);
+div#content-container {
+    background-color: rgb(179, 179, 179);
+    margin: auto;
+    width: 85%;
+    padding: 10px;
+}
+
+div.recipe-container {
+    background-color: orange;
+    margin: 10px;
+    padding: 10px;
 }
