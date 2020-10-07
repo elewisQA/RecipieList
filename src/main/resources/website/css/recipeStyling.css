@@ -20,14 +20,14 @@ div#footer {
 }
 
 div#content-container {
-    background-color: fuchsia;
+    background-color: lime;
     margin: auto;
     width: 85%;
     padding: 10px;
 }
 
 div.recipe-container {
-    background-color: lime;
+    background-color: fuchsia;
     margin: 10px;
     padding: 10px;
 }
