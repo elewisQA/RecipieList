@@ -10,12 +10,14 @@ fetch('http://localhost:1337/recipe/read')
 
         //---[ Process Data ]---
         response.json().then(function(recipeData) {
-            let page = document.querySelector("div#content-container");
+            let page = document.querySelector("div#super-container");
             //let data = Object.keys(recipeData[0]); // Don't need headers?
             for(let recipe of recipeData) {
                 page.appendChild(createRecipe(recipe));
             }
-
+            let br = document.createElement("br");
+            page.appendChild(br);
+            page.appendChild(br);
         });
     }
     //---[ Handle Errors ]---
