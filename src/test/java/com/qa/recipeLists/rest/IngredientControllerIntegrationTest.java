@@ -66,7 +66,7 @@ public class IngredientControllerIntegrationTest {
 	void createTest() throws Exception {
 		this.mock
 		// Mock a POST request
-		.perform(request(HttpMethod.POST, "/Ingredient/create")
+		.perform(request(HttpMethod.POST, "/ingredient/create")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(this.objectMapper.writeValueAsString(testIngredient))
 				.accept(MediaType.APPLICATION_JSON))
@@ -79,7 +79,7 @@ public class IngredientControllerIntegrationTest {
 	void readTest() throws Exception {
 		this.mock
 		// Mock a GET request
-		.perform(request(HttpMethod.GET, "/Ingredient/read/" + this.id)
+		.perform(request(HttpMethod.GET, "/ingredient/read/" + this.id)
 				.accept(MediaType.APPLICATION_JSON))
 		// Test return values against expected
 		.andExpect(status().isOk())
@@ -91,7 +91,7 @@ public class IngredientControllerIntegrationTest {
 		List<Ingredient> IngredientList = new ArrayList<>();
 		this.mock
 		// Mock a GET request
-		.perform(request(HttpMethod.GET, "/Ingredient/read")
+		.perform(request(HttpMethod.GET, "/ingredient/read")
 				.accept(MediaType.APPLICATION_JSON))
 		// Test return values against expected
 		.andExpect(status().isOk())
@@ -113,7 +113,7 @@ public class IngredientControllerIntegrationTest {
 		
 		String result = this.mock
 		// Mock a PUT request
-		.perform(request(HttpMethod.PUT, "/Ingredient/update/" + this.id)
+		.perform(request(HttpMethod.PUT, "/ingredient/update/" + this.id)
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(this.objectMapper.writeValueAsString(newIngredient)))
@@ -130,7 +130,7 @@ public class IngredientControllerIntegrationTest {
 	void deleteTest() throws Exception {
 		this.mock
 		// Mock a DELETE request
-		.perform(request(HttpMethod.DELETE, "/Ingredient/delete/" + this.id))
+		.perform(request(HttpMethod.DELETE, "/ingredient/delete/" + this.id))
 		.andExpect(status().isNoContent());
 	}
 }

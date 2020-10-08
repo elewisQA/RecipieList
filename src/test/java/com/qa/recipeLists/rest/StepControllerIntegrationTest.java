@@ -66,7 +66,7 @@ public class StepControllerIntegrationTest {
 	void createTest() throws Exception {
 		this.mock
 		// Mock a POST request
-		.perform(request(HttpMethod.POST, "/Step/create")
+		.perform(request(HttpMethod.POST, "/step/create")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(this.objectMapper.writeValueAsString(testStep))
 				.accept(MediaType.APPLICATION_JSON))
@@ -79,7 +79,7 @@ public class StepControllerIntegrationTest {
 	void readTest() throws Exception {
 		this.mock
 		// Mock a GET request
-		.perform(request(HttpMethod.GET, "/Step/read/" + this.id)
+		.perform(request(HttpMethod.GET, "/step/read/" + this.id)
 				.accept(MediaType.APPLICATION_JSON))
 		// Test return values against expected
 		.andExpect(status().isOk())
@@ -91,7 +91,7 @@ public class StepControllerIntegrationTest {
 		List<Step> StepList = new ArrayList<>();
 		this.mock
 		// Mock a GET request
-		.perform(request(HttpMethod.GET, "/Step/read")
+		.perform(request(HttpMethod.GET, "/step/read")
 				.accept(MediaType.APPLICATION_JSON))
 		// Test return values against expected
 		.andExpect(status().isOk())
@@ -109,7 +109,7 @@ public class StepControllerIntegrationTest {
 		
 		String result = this.mock
 		// Mock a PUT request
-		.perform(request(HttpMethod.PUT, "/Step/update/" + this.id)
+		.perform(request(HttpMethod.PUT, "/step/update/" + this.id)
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(this.objectMapper.writeValueAsString(newStep)))
@@ -126,7 +126,7 @@ public class StepControllerIntegrationTest {
 	void deleteTest() throws Exception {
 		this.mock
 		// Mock a DELETE request
-		.perform(request(HttpMethod.DELETE, "/Step/delete/" + this.id))
+		.perform(request(HttpMethod.DELETE, "/step/delete/" + this.id))
 		.andExpect(status().isNoContent());
 	}
 }
