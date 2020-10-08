@@ -20,6 +20,7 @@ import com.qa.recipeLists.dto.RecipeDTO;
 import com.qa.recipeLists.dto.StepDTO;
 import com.qa.recipeLists.persistence.domain.Recipe;
 import com.qa.recipeLists.persistence.repository.RecipeRepo;
+import com.qa.recipeLists.utils.RecipeListsUtils;
 
 //---[ Testing Code ]---
 @SpringBootTest
@@ -46,6 +47,7 @@ public class RecipeServiceIntegrationTest {
 	
 	//--[ Mapping Function ]--
 	private RecipeDTO mapToDTO(Recipe recipe) {
+		System.out.println("Recipe to Map:\n" + recipe.toString());
 		return this.modelMapper.map(recipe, RecipeDTO.class);
 	}
 
@@ -56,7 +58,8 @@ public class RecipeServiceIntegrationTest {
 		this.testRecipe = new Recipe(this.exampleName);
 		this.testRecipeId = this.repo.save(testRecipe); // Saving returns with id
 		this.id = testRecipeId.getId();
-		this.dto = this.mapToDTO(testRecipeId);
+		//this.dto = this.mapToDTO(testRecipeId);
+		this.dto = RecipeListsUtils.mapRecipeToDTO(testRecipeId);
 	}
 	
 	@Test
@@ -87,7 +90,7 @@ public class RecipeServiceIntegrationTest {
 				null, 
 				"Shortbread", 
 				ingredients, 
-				steps);;
+				steps);
 		RecipeDTO updatedRecipe = new RecipeDTO(
 				this.id, 
 				newRecipe.getName(),
