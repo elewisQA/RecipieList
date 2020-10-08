@@ -15,57 +15,55 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.qa.recipeLists.dto.IngredientDTO;
-import com.qa.recipeLists.dto.RecipeDTO;
 import com.qa.recipeLists.dto.StepDTO;
+import com.qa.recipeLists.dto.RecipeDTO;
+import com.qa.recipeLists.persistence.domain.Step;
 import com.qa.recipeLists.persistence.domain.Recipe;
-import com.qa.recipeLists.persistence.repository.RecipeRepo;
-import com.qa.recipeLists.utils.RecipeListsUtils;
+import com.qa.recipeLists.persistence.repository.StepRepo;
 
 //---[ Testing Code ]---
 @SpringBootTest
-public class RecipeServiceIntegrationTest {
-	
+public class StepServiceIntegrationTest {
+
 	//--[ Test Resources ]--
 	@Autowired
 	private ModelMapper modelMapper;
 	
 	@Autowired
-	private RecipeService service;
+	private StepService service;
 	
 	@Autowired
-	private RecipeRepo repo;
+	private StepRepo repo;
 	
-	private Recipe testRecipe;
-	private Recipe testRecipeId;
-	private RecipeDTO dto;
-	private List<IngredientDTO> ingredients;
-	private List<StepDTO> steps;
+	private Step testStep;
+	private Step testStepId;
+	private StepDTO dto;
 	
 	private Long id;
-	private final String exampleName = "Battenburg";
+	private final String exampleName = "Step 1";
+	private final String exampleDescription = "Eat the eggs";
 	
 	//--[ Mapping Function ]--
-	private RecipeDTO mapToDTO(Recipe recipe) {
-		System.out.println("Recipe to Map:\n" + recipe.toString());
-		return this.modelMapper.map(recipe, RecipeDTO.class);
+	private StepDTO mapToDTO(Step Step) {
+		return this.modelMapper.map(Step, StepDTO.class);
 	}
-
+	
 	//---[ Test Cases ]---
 	@BeforeEach
 	void init() {
 		this.repo.deleteAll(); // Clear Data to ensure clean test
-		this.testRecipe = new Recipe(this.exampleName);
-		this.testRecipeId = this.repo.save(testRecipe); // Saving returns with id
-		this.id = testRecipeId.getId();
-		//this.dto = this.mapToDTO(testRecipeId);
-		this.dto = RecipeListsUtils.mapRecipeToDTO(testRecipeId);
+		this.testStep = new Step(
+				this.exampleName, 
+				this.exampleDescription);
+		this.testStepId = this.repo.save(testStep); // Saving returns with id
+		this.id = testStepId.getId();
+		this.dto = this.mapToDTO(testStepId);
 	}
 	
 	@Test
 	void testCreate() {
 		assertThat(this.dto)
-		.isEqualTo(this.service.create(testRecipe));
+		.isEqualTo(this.service.create(testStep));
 	}
 	
 	@Test
@@ -86,25 +84,23 @@ public class RecipeServiceIntegrationTest {
 	void testUpdate() {
 		// Set-up test data
 		
-		RecipeDTO newRecipe = new RecipeDTO(
+		StepDTO newStep = new StepDTO(
 				null, 
-				"Shortbread", 
-				ingredients, 
-				steps);
-		RecipeDTO updatedRecipe = new RecipeDTO(
+				"Step 2", 
+				"Eat the butter");
+		StepDTO updatedStep = new StepDTO(
 				this.id, 
-				newRecipe.getName(),
-				newRecipe.getIngredients(), 
-				newRecipe.getSteps());
+				newStep.getName(), 
+				newStep.getDescription());
 		
 		// Test assertion
-		assertThat(updatedRecipe)
-		.isEqualTo(this.service.update(newRecipe, this.id));
+		assertThat(updatedStep)
+		.isEqualTo(this.service.update(newStep, this.id));
 	}
 	
 	@Test
 	void testDelete() {
-		assertThat(this.service.delete(this.testRecipe.getId()))
+		assertThat(this.service.delete(this.testStep.getId()))
 		.isTrue();
 	}
 }
