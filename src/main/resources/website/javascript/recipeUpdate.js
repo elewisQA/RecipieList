@@ -41,6 +41,13 @@ fetch(url)
             addStep.onclick = function() {
                 addStepRow();
             }
+
+            let recipeSave = document.querySelector("a#save-button");
+            recipeSave.onclick = function() {
+                let title = document.querySelector("h1#title-field");
+                name = title.innerHTML;
+                updateRecipe();
+            }
         });
     }
     //--[ Handle Errors ]--
@@ -377,5 +384,5 @@ function updateRecipe() {
     .catch(function (error) {
         console.log("Request failed: ", error);
     })
-    //location.reload();
+    location.reload();
 }
