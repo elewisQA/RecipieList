@@ -31,6 +31,9 @@ public class StepService {
 	}
 	
 	//--[ Service Methods ]--
+	private Step mapFromDTO(StepDTO stepDTO) {
+		return this.mapper.map(stepDTO, Step.class);
+	}
 	private StepDTO mapToDTO(Step step) {
 		return this.mapper.map(step, StepDTO.class);
 	}

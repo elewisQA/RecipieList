@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.recipeLists.dto.RecipeDTO;
@@ -22,7 +23,6 @@ import com.qa.recipeLists.service.RecipeService;
 
 //---[ Controller Definition ]---
 @RestController
-@CrossOrigin
 @RequestMapping("/recipe") // Map to '/recipe' destination of URL
 public class RecipeController {
 

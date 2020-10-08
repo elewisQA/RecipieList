@@ -31,6 +31,10 @@ public class RecipeService {
 	}
 	
 	//--[ Service Methods ]--
+	private Recipe mapFromDTO(RecipeDTO recipeDTO) {
+		return this.mapper.map(recipeDTO, Recipe.class);
+	}
+	
 	private RecipeDTO mapToDTO(Recipe recipe) {
 		return this.mapper.map(recipe, RecipeDTO.class);
 	}
