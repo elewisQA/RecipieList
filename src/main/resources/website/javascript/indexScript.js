@@ -129,20 +129,6 @@ function createIngredients(ingredientCol, ingredients) {
         let name = document.createElement("td");
         let qty = document.createElement("td");
         let unit = document.createElement("td");
-        // Button bits
-        let edit = document.createElement("td");
-        let editButton = document.createElement("a");
-        editButton.setAttribute("class", "btn btn-warning");
-        editButton.setAttribute("href", "ingredientUpdate.html?id=" + i.id);
-        editButton.innerHTML = "Edit";
-        edit.appendChild(editButton);
-        let del = document.createElement("td");
-        let delButton = document.createElement("a");
-        delButton.setAttribute("class", "btn btn-danger");
-        delButton.setAttribute("href", "#");
-        delButton.innerHTML = "Delete";
-        deleteListener(delButton, 'ingredient', i.id)
-        del.appendChild(delButton);
 
         // Populate with data
         name.innerHTML = i.name;
@@ -153,8 +139,6 @@ function createIngredients(ingredientCol, ingredients) {
         row.appendChild(name);
         row.appendChild(qty);
         row.appendChild(unit);
-        row.appendChild(edit);
-        row.appendChild(del);
         tableBody.appendChild(row);
     }
 
@@ -194,20 +178,6 @@ function createSteps(stepCol, steps) {
         let row = tableBody.insertRow();
         let name = document.createElement("td");
         let desc = document.createElement("td");
-        // Button bits
-        let edit = document.createElement("td");
-        let editButton = document.createElement("a");
-        editButton.setAttribute("class", "btn btn-warning");
-        editButton.setAttribute("href", "stepUpdate.html?id=" + i.id);
-        editButton.innerHTML = "Edit";
-        edit.appendChild(editButton);
-        let del = document.createElement("td");
-        let delButton = document.createElement("a");
-        delButton.setAttribute("class", "btn btn-danger");
-        delButton.setAttribute("href", "#");
-        delButton.innerHTML = "Delete";
-        deleteListener(delButton, 'step', i.id)
-        del.appendChild(delButton);
 
         // Populate with data
         name.innerHTML = i.name;
@@ -216,8 +186,6 @@ function createSteps(stepCol, steps) {
         // Add to the table row
         row.appendChild(name);
         row.appendChild(desc);
-        row.appendChild(edit);
-        row.appendChild(del);
         tableBody.appendChild(row);
     }
 
