@@ -73,21 +73,28 @@ function buildIngredientsTable() {
         id.innerHTML = i.id;
         tr.appendChild(id);
         let name = document.createElement("td");
-        name.setAttribute("contenteditable", "true")
+        name.setAttribute("contenteditable", "true");
+        name.setAttribute("class", "ingredient-name-field");
+        name.setAttribute("id", "ingredient-name-" + i.id)
         name.innerHTML = i.name;
         tr.appendChild(name);
         let qty = document.createElement("td");
-        qty.setAttribute("contenteditable", "true")
+        qty.setAttribute("contenteditable", "true");
+        qty.setAttribute("class", "qty-field");
+        qty.setAttribute("id", "qty-" + i.id)
         qty.innerHTML =  i.quantity;
         tr.appendChild(qty);
         let unit = document.createElement("td");
-        unit.setAttribute("contenteditable", "true")
+        unit.setAttribute("contenteditable", "true");
+        unit.setAttribute("class", "unit-field");
+        unit.setAttribute("id", "id-" + i.id)
         unit.innerHTML = i.unit;
         tr.appendChild(unit);
 
         // Add Save Button
         let save = document.createElement("a");
         save.setAttribute("class", "btn btn-warning");
+        save.setAttribute("id", "isave-" + i.id);
         save.setAttribute("href", "#");
         save.innerHTML = "Update";
         updateIngredientListener(save, name, qty, unit, i.id);
@@ -96,6 +103,7 @@ function buildIngredientsTable() {
         // Add Delete Button
         let del = document.createElement("a");
         del.setAttribute("class", "btn btn-danger");
+        del.setAttribute("id", "idel-" + i.id);
         del.setAttribute("href", "#");
         del.innerHTML = "Delete";
         deleteListener(del, "ingredient", i.id);
@@ -118,17 +126,20 @@ function buildStepsTable() {
         id.innerHTML = s.id;
         tr.appendChild(id);
         let name = document.createElement("td");
-        name.setAttribute("contenteditable", "true")
+        name.setAttribute("contenteditable", "true");
+        name.setAttribute("id", "step-name-" + s.id)
         name.innerHTML = s.name;
         tr.appendChild(name);
         let description = document.createElement("td");
-        description.setAttribute("contenteditable", "true")
+        description.setAttribute("contenteditable", "true");
+        description.setAttribute("id", "description-" + s.id)
         description.innerHTML =  s.description;
         tr.appendChild(description);
 
         // Add Save Button
         let save = document.createElement("a");
         save.setAttribute("class", "btn btn-warning");
+        save.setAttribute("id", "ssave-" + s.id);
         save.setAttribute("href", "#");
         save.innerHTML = "Update";
         updateStepListener(save, name, description, s.id);
@@ -136,6 +147,7 @@ function buildStepsTable() {
         // Add Delete Button
         let del = document.createElement("a");
         del.setAttribute("class", "btn btn-danger");
+        del.setAttribute("id", "sdel-" + s.id);
         del.setAttribute("href", "#");
         del.innerHTML = "Delete";
         deleteListener(del, "step", s.id);
@@ -157,20 +169,24 @@ function addIngredientRow() {
     tr.appendChild(id);
     let name = document.createElement("td");
     name.setAttribute("contenteditable", "true")
+    name.setAttribute("id", "add-name");
     name.innerHTML = "Name";
     tr.appendChild(name);
     let qty = document.createElement("td");
     qty.setAttribute("contenteditable", "true")
+    qty.setAttribute("id", "add-qty");
     qty.innerHTML = "0";
     tr.appendChild(qty);
     let unit = document.createElement("td");
     unit.setAttribute("contenteditable", "true")
+    unit.setAttribute("id", "add-unit");
     unit.innerHTML = "x";
     tr.appendChild(unit);
 
     // Add 'Add' Button
     let add = document.createElement("a");
     add.setAttribute("class", "btn btn-warning");
+    add.setAttribute("id", "add-add");
     add.setAttribute("href", "#");
     add.innerHTML = "Add";
     addIngredientListener(add, name, qty, unit);
@@ -178,6 +194,7 @@ function addIngredientRow() {
     // Add Delete Button
     let del = document.createElement("a");
     del.setAttribute("class", "btn btn-danger");
+    del.setAttribute("id", "add-del");
     del.setAttribute("href", "#");
     del.innerHTML = "Delete";
     del.onclick = function() {
