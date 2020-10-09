@@ -55,6 +55,8 @@ public class RecipeController {
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<RecipeDTO> update(@PathVariable Long id, @RequestBody RecipeDTO dto) {
+		System.out.println("Update ID: " + id);
+		System.out.println("Update Obj:\n" + dto.toString());
 		return new ResponseEntity<>(this.service.update(dto, id), HttpStatus.ACCEPTED);
 	}
 	

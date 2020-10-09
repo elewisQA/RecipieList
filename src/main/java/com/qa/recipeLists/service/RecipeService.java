@@ -1,5 +1,6 @@
 package com.qa.recipeLists.service;
 
+import java.util.ArrayList;
 //---[ Imports ]---
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,7 +43,8 @@ public class RecipeService {
 	// CRUD Methods
 	public RecipeDTO create(Recipe recipe) {
 		Recipe created = this.repo.save(recipe);
-		return this.mapToDTO(created);
+		//return this.mapToDTO(created);
+		return this.mapToDTO(recipe);
 	}
 	
 	public List<RecipeDTO> read() {	// Read-All Method
@@ -53,13 +55,14 @@ public class RecipeService {
 	public RecipeDTO read(Long id) { // Read-by-id Method
 		Recipe found = this.repo.findById(id)
 				.orElseThrow(RecipeNotFoundException::new);
-		return this.mapToDTO(found);
+		RecipeDTO mapped = this.mapToDTO(found);
+		return mapped;
 	}
 	
 	public RecipeDTO update(RecipeDTO dto, Long id) {
 		Recipe toUpdate = this.repo.findById(id)
 				.orElseThrow(RecipeNotFoundException::new);
-		RecipeListsUtils.mergeNotNull(dto, toUpdate);
+		toUpdate = RecipeListsUtils.mapRecipeFromDTO(dto, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
 		
 	}
