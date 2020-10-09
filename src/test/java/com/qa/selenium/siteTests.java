@@ -1,10 +1,13 @@
 package com.qa.selenium;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 //---[ Imports ]---
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,18 +30,35 @@ public class siteTests {
 		ChromeOptions options = new ChromeOptions();
 		options.setHeadless(false); // Show Browser when Testing (?)
 		this.driver = new ChromeDriver(options);
-		driver.manage().window().setSize(new Dimension(1366, 768));
+		this.driver.manage().window().setSize(new Dimension(1366, 768));
 	}
 	
 	@Test
 	void renameTest() throws InterruptedException {
-		// Open Web-Page
-		driver.get(url);
-		
+		// Set-up Test Resources
+		driver.get(this.url);
+		String name = "Battenburg";
+	
+		// Click 'Edit' Button for first recipe
+		this.wait = new WebDriverWait(driver,10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.id("editRecipe-1")));
-		driver.findElement(By.id("editRecipe-1")).click();
+		this.driver.findElement(By.id("editRecipe-1")).click();
 		
-		Thread.sleep(5000);
+		// Rename
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("title-field")));
+		this.driver.findElement(By.id("title-field")).sendKeys(name);
+		
+		// Click 'Save'
+		this.driver.findElement(By.id("save-button")).click();
+
+		// Check Rename After Refresh
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("title-field")));
+		WebElement title = this.driver.findElement(By.id("title-field"));
+		
+		// Test Assertion
+		assertThat(title.getAttribute("innerHTML").equals(name));
 	}
 }
