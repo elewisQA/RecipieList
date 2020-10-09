@@ -44,8 +44,11 @@ fetch(url)
 
             let recipeSave = document.querySelector("a#save-button");
             recipeSave.onclick = function() {
-                let title = document.querySelector("h1#title-field");
-                name = title.innerHTML;
+                console.log("click")
+                let nameField = document.querySelector("input#title-field");
+                if (nameField.value !== "") {
+                    name = nameField.value;
+                }
                 updateRecipe();
             }
         });
@@ -59,8 +62,8 @@ fetch(url)
 function buildTitle(id, name) {
     let idField = document.querySelector("h2#id-field");
     idField.innerHTML = id;
-    let nameField = document.querySelector("h1#title-field");
-    nameField.innerHTML = name;
+    let nameField = document.querySelector("input#title-field");
+    nameField.setAttribute("placeholder", name);
 }
 
 function buildIngredientsTable() {
@@ -73,29 +76,43 @@ function buildIngredientsTable() {
         id.innerHTML = i.id;
         tr.appendChild(id);
         let name = document.createElement("td");
-        name.setAttribute("contenteditable", "true")
-        name.innerHTML = i.name;
+        let nameField = document.createElement("input");
+        nameField.setAttribute("class", "ingredient-name-field");
+        nameField.setAttribute("id", "ingredient-name-" + i.id)
+        nameField.setAttribute("placeholder", i.name);
+        nameField.setAttribute("type", "text")
+        name.appendChild(nameField);
         tr.appendChild(name);
         let qty = document.createElement("td");
-        qty.setAttribute("contenteditable", "true")
-        qty.innerHTML =  i.quantity;
+        let qtyField = document.createElement("input");
+        qtyField.setAttribute("class", "qty-field");
+        qtyField.setAttribute("id", "qty-" + i.id);
+        qtyField.setAttribute("placeholder", i.quantity);
+        qtyField.setAttribute("type", "number")
+        qty.appendChild(qtyField);
         tr.appendChild(qty);
         let unit = document.createElement("td");
-        unit.setAttribute("contenteditable", "true")
-        unit.innerHTML = i.unit;
+        let unitField = document.createElement("input");
+        unitField.setAttribute("class", "unit-field");
+        unitField.setAttribute("id", "unit-" + i.id);
+        unitField.setAttribute("placeholder", i.unit);
+        unitField.setAttribute("type", "text");
+        unit.appendChild(unitField);
         tr.appendChild(unit);
 
         // Add Save Button
         let save = document.createElement("a");
         save.setAttribute("class", "btn btn-warning");
+        save.setAttribute("id", "isave-" + i.id);
         save.setAttribute("href", "#");
         save.innerHTML = "Update";
-        updateIngredientListener(save, name, qty, unit, i.id);
+        updateIngredientListener(save, nameField, qtyField, unitField, i.id);
 
         
         // Add Delete Button
         let del = document.createElement("a");
         del.setAttribute("class", "btn btn-danger");
+        del.setAttribute("id", "idel-" + i.id);
         del.setAttribute("href", "#");
         del.innerHTML = "Delete";
         deleteListener(del, "ingredient", i.id);
@@ -118,24 +135,33 @@ function buildStepsTable() {
         id.innerHTML = s.id;
         tr.appendChild(id);
         let name = document.createElement("td");
-        name.setAttribute("contenteditable", "true")
-        name.innerHTML = s.name;
+        let nameField = document.createElement("input");
+        nameField.setAttribute("id", "step-name-" + s.id);
+        nameField.setAttribute("class", "name-step-field");
+        nameField.setAttribute("placeholder", s.name);
+        nameField.setAttribute("type", "text");
+        name.appendChild(nameField);
         tr.appendChild(name);
         let description = document.createElement("td");
-        description.setAttribute("contenteditable", "true")
-        description.innerHTML =  s.description;
+        let descriptionField = document.createElement("input");
+        descriptionField.setAttribute("id", "description-" + s.id);
+        descriptionField.setAttribute("placeholder", s.description);
+        descriptionField.setAttribute("type", "text");
+        description.appendChild(descriptionField);
         tr.appendChild(description);
 
         // Add Save Button
         let save = document.createElement("a");
         save.setAttribute("class", "btn btn-warning");
+        save.setAttribute("id", "ssave-" + s.id);
         save.setAttribute("href", "#");
         save.innerHTML = "Update";
-        updateStepListener(save, name, description, s.id);
+        updateStepListener(save, nameField, descriptionField, s.id);
 
         // Add Delete Button
         let del = document.createElement("a");
         del.setAttribute("class", "btn btn-danger");
+        del.setAttribute("id", "sdel-" + s.id);
         del.setAttribute("href", "#");
         del.innerHTML = "Delete";
         deleteListener(del, "step", s.id);
@@ -156,28 +182,39 @@ function addIngredientRow() {
     id.innerHTML = "N";
     tr.appendChild(id);
     let name = document.createElement("td");
-    name.setAttribute("contenteditable", "true")
-    name.innerHTML = "Name";
+    let nameField = document.createElement("input");
+    nameField.setAttribute("class", "add-ingredient-name-field");
+    nameField.setAttribute("type", "text");
+    nameField.setAttribute("placeholder", "name");
+    name.appendChild(nameField);
     tr.appendChild(name);
     let qty = document.createElement("td");
-    qty.setAttribute("contenteditable", "true")
-    qty.innerHTML = "0";
+    let qtyField = document.createElement("input");
+    qtyField.setAttribute("class", "add-qty-field");
+    qtyField.setAttribute("type", "number");
+    qtyField.setAttribute("placeholder", "amount");
+    qty.appendChild(qtyField);
     tr.appendChild(qty);
     let unit = document.createElement("td");
-    unit.setAttribute("contenteditable", "true")
-    unit.innerHTML = "x";
+    let unitField = document.createElement("input");
+    unitField.setAttribute("class", "add-unit-field");
+    unitField.setAttribute("type", "text");
+    unitField.setAttribute("placeholder", "unit");
+    unit.appendChild(unitField);
     tr.appendChild(unit);
 
     // Add 'Add' Button
     let add = document.createElement("a");
     add.setAttribute("class", "btn btn-warning");
+    add.setAttribute("id", "add-ingredient-button");
     add.setAttribute("href", "#");
     add.innerHTML = "Add";
-    addIngredientListener(add, name, qty, unit);
+    addIngredientListener(add, nameField, qtyField, unitField);
 
     // Add Delete Button
     let del = document.createElement("a");
     del.setAttribute("class", "btn btn-danger");
+    del.setAttribute("id", "add-del");
     del.setAttribute("href", "#");
     del.innerHTML = "Delete";
     del.onclick = function() {
@@ -197,20 +234,25 @@ function addStepRow() {
     id.innerHTML = "N";
     tr.appendChild(id);
     let name = document.createElement("td");
-    name.setAttribute("contenteditable", "true")
-    name.innerHTML = "Name";
+    let nameField = document.createElement("input");
+    nameField.setAttribute("class", "add-step-name-field");
+    nameField.setAttribute("placeholder", "name");
+    name.appendChild(nameField);
     tr.appendChild(name);
     let desc = document.createElement("td");
-    desc.setAttribute("contenteditable", "true")
-    desc.innerHTML = "description";
+    let descField = document.createElement("input");
+    descField.setAttribute("class", "add-desc-field");
+    descField.setAttribute("placeholder", "description");
+    desc.appendChild(descField);
     tr.appendChild(desc);
 
     // Add 'Add' Button
     let add = document.createElement("a");
     add.setAttribute("class", "btn btn-warning");
+    add.setAttribute("id", "add-step-button");
     add.setAttribute("href", "#");
     add.innerHTML = "Add";
-    addStepListener(add, name, desc);
+    addStepListener(add, nameField, descField);
 
     // Add Delete Button
     let del = document.createElement("a");
@@ -227,15 +269,31 @@ function addStepRow() {
 }
 
 //---[ Button Listeners ]---
-function updateIngredientListener(button, name, quantity, unit, id) {
+function updateIngredientListener(button, nameField, quantityField, unitField, id) {
     let updateURL = "http://localhost:1337/ingredient/update/" + id;
     button.onclick = function() {
-        // Format Data from fields
+        // Set values with placeholder data grabbed from original fetch
+        let name = nameField.getAttribute("placeholder");
+        let qty = quantityField.getAttribute("placeholder");
+        let unit = unitField.getAttribute("placeholder");
+
+        // Check if user has entered values, if so - replace
+        if (nameField.value !== "") { 
+            name = nameField.value;
+        }
+        if (quantityField.value !== "") {
+            qty = quantityField.value;
+        }
+        if (unitField.value !== "") {
+            unit = unitField.value;
+        }
+
+        // Format into object
         let dataToPost = {
             "id": id,
-            "name": name.innerHTML,
-            "unit": unit.innerHTML,
-            "quantity": parseFloat(quantity.innerHTML)
+            "name": name,
+            "unit": unit,
+            "quantity": parseFloat(qty)
         }
         
         // Send Update Request
@@ -257,14 +315,28 @@ function updateIngredientListener(button, name, quantity, unit, id) {
     }
 }
 
-function addIngredientListener(button, name, quantity, unit) {
+function addIngredientListener(button, nameField, quantityField, unitField) {
     let createURL = "http://localhost:1337/ingredient/create";
     button.onclick = function() {
-        // Format Data from fields
+        // Set values with placeholder data grabbed from original fetch
+        let name = nameField.getAttribute("placeholder");
+        let qty = quantityField.getAttribute("placeholder");
+        let unit = unitField.getAttribute("placeholder");
+        
+        // Check if user has entered values, if so - replace
+        if (nameField.value !== "") { 
+            name = nameField.value;
+        }
+        if (quantityField.value !== "") {
+             qty = quantityField.value;
+        }
+        if (unitField.value !== "") {
+            unit = unitField.value;
+        }
         let dataToPost = {
-            "name": name.innerHTML,
-            "unit": unit.innerHTML,
-            "quantity": parseFloat(quantity.innerHTML)
+            "name": name,
+            "unit": unit,
+            "quantity": parseFloat(qty)
         }
 
         // Send Create Request
@@ -291,14 +363,24 @@ function addIngredientListener(button, name, quantity, unit) {
     }
 }
 
-function updateStepListener(button, name, description, id) {    
+function updateStepListener(button, nameField, descriptionField, id) {    
     let updateURL = "http://localhost:1337/step/update/" + id;
     button.onclick = function() {    
-        // Format Data from fields
+        // Set values with placeholder data grabbed from original fetch
+        let name = nameField.getAttribute("placeholder");
+        let desc = descriptionField.getAttribute("placeholder");
+        
+        // Check if user has entered values, if so - replace
+        if (nameField.value !== "") { 
+            name = nameField.value;
+        }
+        if (descriptionField.value !== "") {
+            desc = quantityField.value;
+        }
         let dataToPost = {
             "id": id,
-            "name": name.innerHTML,
-            "description": description.innerHTML
+            "name": name,
+            "description": desc
         }
 
         // SEnd Update Request
@@ -322,13 +404,24 @@ function updateStepListener(button, name, description, id) {
 }
 
 
-function addStepListener(button, name, description) {
+function addStepListener(button, nameField, descriptionField) {
     let createURL = "http://localhost:1337/step/create";
     button.onclick = function() {
+        // Set values with placeholder data grabbed from original fetch
+        let name = nameField.getAttribute("placeholder");
+        let desc = descriptionField.getAttribute("placeholder");
+                
+        // Check if user has entered values, if so - replace
+        if (nameField.value !== "") { 
+            name = nameField.value;
+        }
+        if (descriptionField.value !== "") {
+            desc = quantityField.value;
+        }
         // Format Data from fields
         let dataToPost = {
-            "name": name.innerHTML,
-            "description": description.innerHTML,
+            "name": name,
+            "description": desc
         }
 
         // Send Create Request

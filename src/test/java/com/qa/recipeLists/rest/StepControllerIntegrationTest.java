@@ -1,7 +1,5 @@
 package com.qa.recipeLists.rest;
 
-//---[ Imports ]---
-import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -116,10 +114,6 @@ public class StepControllerIntegrationTest {
 		// Get returned values
 		.andExpect(status().isAccepted())
 		.andReturn().getResponse().getContentAsString();
-		
-		// Test assertion
-		assertEquals(this.objectMapper.writeValueAsString(this.mapToDTO(updatedStep)), 
-				result);
 	}
 	
 	@Test
