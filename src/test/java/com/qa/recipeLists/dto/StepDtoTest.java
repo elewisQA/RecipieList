@@ -1,6 +1,6 @@
 package com.qa.recipeLists.dto;
-
-import org.junit.Test;
+//---[ Imports ]---
+import org.junit.jupiter.api.Test;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
