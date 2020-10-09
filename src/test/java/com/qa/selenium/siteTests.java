@@ -91,6 +91,24 @@ public class siteTests {
 		assertThat(beforeTitles.size() !=  afterTitles.size());
 	}
 	
+	@Test
+	void addRecipeTest() {
+		// Set-up Test resources
+		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
+		
+		// Click 'Add' Button
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.className("btn btn-primary")));
+		this.driver.findElement(By.className("btn btn-primary")).click(); // Click It
+		
+		// Wait for reload
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath("//*[contains(text(),'New Recipe')]")));
+		
+		// Test Fails if this never appears
+	}
+	
 	//==[ INGREDIENT TEST CASES ]==
 	@Test
 	void renameIngredientTest(){
@@ -192,6 +210,49 @@ public class siteTests {
 		assertThat(beforeNames.size() != afterNames.size());
 	}
 	
+	@Test
+	void addIngredientTest() {
+		// Set-up Test Resources
+		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
+		String name = "Rose Water";
+		String unit = "tbsp";
+		String qty = "10";
+		
+		// Click 'Edit' Button for first recipe	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("editRecipe-1")));
+		this.driver.findElement(By.id("editRecipe-1")).click();
+		
+		// Wait for 'Add' Button to appear	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("ingredient-add")));
+		this.driver.findElement(By.id("ingredient-add")).click();
+		
+		// Wait for new-row to appear
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.className("add-ingredient-name-field")));
+		
+		// Populate new row with data
+		this.driver.findElement(By.className("add-ingredient-name-field"))
+		.sendKeys(name);
+		this.driver.findElement(By.className("add-qty-field"))
+		.sendKeys(qty);
+		this.driver.findElement(By.className("add-unit-field"))
+		.sendKeys(unit);
+		
+		// Find and click "add" button
+		this.driver.findElement(By.id("add-ingredient-button")).click();
+		
+		// Wait for page-reload
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.className("ingredient-name-field")));
+		
+		// Get new element
+		WebElement newNameField = driver.findElement(By.xpath("//input[@placeholder='" + name + "']"));
+		assertThat(newNameField.getAttribute("placeholder").contentEquals(name));
+	}
+	
 	//==[ STEP TEST CASES ]==
 	@Test
 	void renameStepTest() {
@@ -273,7 +334,7 @@ public class siteTests {
 		
 		// Wait for elements to appear 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.id("sdel-2")));
+				By.id("sdel-1")));
 		
 		// Get Before-List
 		List<WebElement> beforeNames = driver.findElements(By.className("step-name-field"));
@@ -287,6 +348,46 @@ public class siteTests {
 		
 		// Assert change in no. elements
 		assertThat(beforeNames.size() != afterNames.size());
+	}
+	
+	@Test
+	void addStepTest() {
+		// Set-up Test Resources
+		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
+		String name = "Opt.";
+		String desc = "EAT KALE";
+		
+		// Click 'Edit' Button for first recipe	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("editRecipe-1")));
+		this.driver.findElement(By.id("editRecipe-1")).click();
+		
+		// Wait for 'Add' Button to appear	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("step-add")));
+		this.driver.findElement(By.id("step-add")).click();
+		
+		// Wait for new-row to appear
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.className("add-step-name-field")));
+		
+		// Populate new row with data
+		this.driver.findElement(By.className("add-step-name-field"))
+		.sendKeys(name);
+		this.driver.findElement(By.className("add-desc-field"))
+		.sendKeys(desc);
+		
+		// Find and click "add" button
+		this.driver.findElement(By.id("add-step-button")).click();
+		
+		// Wait for page-reload
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.className("name-step-field")));
+		
+		// Get new element
+		WebElement newNameField = driver.findElement(By.xpath("//input[@placeholder='" + name + "']"));
+		assertThat(newNameField.getAttribute("placeholder").contentEquals(name));
 	}
 	
 	//---[ After Each - Kill Driver ]---
