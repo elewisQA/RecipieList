@@ -2,6 +2,8 @@ package com.qa.selenium;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 //---[ Imports ]---
 import org.junit.jupiter.api.BeforeEach;
@@ -34,14 +36,15 @@ public class siteTests {
 		this.driver.manage().window().setSize(new Dimension(1366, 768));
 	}
 	
+	//==[ RECIPE TEST CASE ]==
 	@Test
 	void renameRecipeTest() {
 		// Set-up Test Resources
 		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
 		String name = "Battenburg";
 	
 		// Click 'Edit' Button for first recipe
-		this.wait = new WebDriverWait(driver,10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.id("editRecipe-1")));
 		this.driver.findElement(By.id("editRecipe-1")).click();
@@ -58,19 +61,45 @@ public class siteTests {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.id("title-field")));
 		WebElement title = this.driver.findElement(By.id("title-field"));
-		
+
 		// Test Assertion
-		assertThat(title.getAttribute("innerHTML").equals(name));
+		assertThat(title.getAttribute("value").equals(name));
 	}
 	
 	@Test
-	void renameIngredientTest() {
+	void deleteRecipeTest() {
+		// Set-up Test resources
+		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
+		
+		// Wait for target-button to load
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("delRecipe-2")));
+		
+		// Get All Recipe-Titles
+		List<WebElement> beforeTitles = this.driver.findElements(By.className("recipe-title"));
+		
+		// Click 'Delete'
+		this.driver.findElement(By.id("delRecipe-2")).click();
+		
+		// Get All Recipe-Titles
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("delRecipe-1")));
+		List<WebElement> afterTitles = this.driver.findElements(By.className("recipe-title"));
+		
+		// Assert - list size difference
+		assertThat(beforeTitles.size() !=  afterTitles.size());
+	}
+	
+	//==[ INGREDIENT TEST CASES ]==
+	@Test
+	void renameIngredientTest(){
 		// Set-up Test Resources
 		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
 		String name = "Rye-Flour";
 	
-		// Click 'Edit' Button for first recipe
-		this.wait = new WebDriverWait(driver,10);
+		// Click 'Edit' Button for first recipe	
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.id("editRecipe-1")));
 		this.driver.findElement(By.id("editRecipe-1")).click();
@@ -89,11 +118,120 @@ public class siteTests {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.id("ingredient-name-1")));
 		WebElement savedName = this.driver.findElement(By.id("ingredient-name-1"));
-		
+
 		// Test Assertion
-		assertThat(savedName.getAttribute("innerHTML").equals(name));
+		assertThat(savedName.getAttribute("value").equals(name));
 	}
 	
+	@Test
+	void updateIngredientTest(){
+		// Set-up Test Resources
+		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
+		String name = "Wheat-Flour";
+		String unit = "kg";
+		String qty = "7";
+	
+		// Click 'Edit' Button for first recipe	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("editRecipe-1")));
+		this.driver.findElement(By.id("editRecipe-1")).click();
+		
+		// Wait for elements to appear 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("ingredient-name-1")));
+		this.driver.findElement(By.id("ingredient-name-1")).sendKeys(name);		// Update Name
+		this.driver.findElement(By.id("qty-1")).sendKeys(qty);					// Update Quantity
+		this.driver.findElement(By.id("unit-1")).sendKeys(unit);				// Update Unit
+		
+		
+		// Click 'Save'
+		this.driver.findElement(By.id("isave-1"))
+		.click();
+
+		// Wait for elements after refresh
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("ingredient-name-1")));
+		
+		WebElement updatedName = this.driver.findElement(By.id("ingredient-name-1"));
+		WebElement updatedQty = this.driver.findElement(By.id("qty-1"));
+		WebElement updatedUnit = this.driver.findElement(By.id("unit-1"));
+
+		// Test Assertions
+		assertThat(updatedName.getAttribute("value").equals(name));
+		assertThat(updatedQty.getAttribute("value").equals(qty));
+		assertThat(updatedUnit.getAttribute("value").equals(unit));
+	}
+	
+	//==[ STEP TEST CASES ]==
+	@Test
+	void renameStepTest() {
+		// Set-up Test Resources
+		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
+		String name = "Step X";
+	
+		// Click 'Edit' Button for first recipe		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("editRecipe-1")));
+		this.driver.findElement(By.id("editRecipe-1")).click();
+		
+		// Rename
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("ingredient-name-1")));
+		WebElement field = this.driver.findElement(By.id("step-name-1"));
+		field.sendKeys(name);
+		
+		// Click 'Save'
+		this.driver.findElement(By.id("ssave-1"))
+		.click();
+
+		// Check Rename After Refresh
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("step-name-1")));
+		WebElement savedName = this.driver.findElement(By.id("step-name-1"));
+
+		// Test Assertion
+		assertThat(savedName.getAttribute("value").equals(name));
+	}
+	
+	@Test
+	void updateStepTest(){
+		// Set-up Test Resources
+		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
+		String name = "Wheat-Flour";
+		String desc = "EAT BUTTER";
+	
+		// Click 'Edit' Button for first recipe	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("editRecipe-1")));
+		this.driver.findElement(By.id("editRecipe-1")).click();
+		
+		// Wait for elements to appear 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("step-name-1")));
+		this.driver.findElement(By.id("step-name-1")).sendKeys(name);		// Update Name
+		this.driver.findElement(By.id("description-1")).sendKeys(desc);		// Update Description
+		
+		
+		// Click 'Save'
+		this.driver.findElement(By.id("ssave-1"))
+		.click();
+
+		// Wait for elements after refresh
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("step-name-1")));
+		
+		WebElement updatedName = this.driver.findElement(By.id("step-name-1"));
+		WebElement updatedDesc = this.driver.findElement(By.id("description-1"));
+
+		// Test Assertions
+		assertThat(updatedName.getAttribute("value").equals(name));
+		assertThat(updatedDesc.getAttribute("value").equals(desc));
+	}
+	
+	//---[ After Each - Kill Driver ]---
 	@AfterEach
 	void tearDown() {
 		driver.quit();
