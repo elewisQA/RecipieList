@@ -31,7 +31,7 @@ public class siteTests {
 		System.setProperty("webdriver.chrome.driver",
 				"src/test/resources/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
-		options.setHeadless(false); // Show Browser when Testing (?)
+		options.setHeadless(true); // Show Browser when Testing (?)
 		this.driver = new ChromeDriver(options);
 		this.driver.manage().window().setSize(new Dimension(1366, 768));
 	}
@@ -163,6 +163,35 @@ public class siteTests {
 		assertThat(updatedUnit.getAttribute("value").equals(unit));
 	}
 	
+	@Test
+	void deleteIngredientTest() {
+		// Set-up Test Resources
+		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
+	
+		// Click 'Edit' Button for first recipe	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("editRecipe-1")));
+		this.driver.findElement(By.id("editRecipe-1")).click();
+		
+		// Wait for elements to appear 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("idel-2")));
+		
+		// Get Before-List
+		List<WebElement> beforeNames = driver.findElements(By.className("ingredient-name-field"));
+		
+		// Click Delete
+		driver.findElement(By.id("idel-2")).click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("idel-1")));
+		List<WebElement> afterNames = driver.findElements(By.className("ingredient-name-field"));
+		
+		// Assert change in no. elements
+		assertThat(beforeNames.size() != afterNames.size());
+	}
+	
 	//==[ STEP TEST CASES ]==
 	@Test
 	void renameStepTest() {
@@ -229,6 +258,35 @@ public class siteTests {
 		// Test Assertions
 		assertThat(updatedName.getAttribute("value").equals(name));
 		assertThat(updatedDesc.getAttribute("value").equals(desc));
+	}
+	
+	@Test
+	void deleteStepTest() {
+		// Set-up Test Resources
+		driver.get(this.url);
+		this.wait = new WebDriverWait(driver,10);
+	
+		// Click 'Edit' Button for first recipe	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("editRecipe-1")));
+		this.driver.findElement(By.id("editRecipe-1")).click();
+		
+		// Wait for elements to appear 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("sdel-2")));
+		
+		// Get Before-List
+		List<WebElement> beforeNames = driver.findElements(By.className("step-name-field"));
+		
+		// Click Delete
+		driver.findElement(By.id("sdel-2")).click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("sdel-1")));
+		List<WebElement> afterNames = driver.findElements(By.className("step-name-field"));
+		
+		// Assert change in no. elements
+		assertThat(beforeNames.size() != afterNames.size());
 	}
 	
 	//---[ After Each - Kill Driver ]---
