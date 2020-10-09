@@ -15,6 +15,16 @@ fetch('http://localhost:1337/recipe/read')
             for(let recipe of recipeData) {
                 page.appendChild(createRecipe(recipe));
             }
+            // Add an 'Add' button
+            let addButton = document.createElement("a");
+            addButton.setAttribute("class", "btn btn-primary");
+            addButton.setAttribute("href", "#");
+            addButton.innerHTML = "Add";
+            addButton.onclick = function() {
+                addRecipe();
+            }
+            page.appendChild(addButton);
+            // Add spacing to the bottom of the page
             let br = document.createElement("br");
             page.appendChild(br);
             page.appendChild(br);
@@ -196,5 +206,31 @@ function createSteps(stepCol, steps) {
     stepCol.appendChild(table);
 
     return stepCol
+}
+
+function addRecipe() {
+    let postURL = "http://localhost:1337/recipe/create";
+    // New Data to Send
+    dataToPost = {
+        "name": "New Recipe",
+        "ingredients": [],
+        "steps": []
+    }
+    
+    // Sent POST request
+    fetch(postURL, {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json",
+        },
+        body:json = JSON.stringify(dataToPost)
+    })
+    .then(JSON)
+    .then(function (response) {
+        location.reload();
+    })
+    .catch(function (err) {
+        console.log("Request failed: ", err);
+    })
 }
 

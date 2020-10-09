@@ -137,6 +137,7 @@ function buildStepsTable() {
         let name = document.createElement("td");
         let nameField = document.createElement("input");
         nameField.setAttribute("id", "step-name-" + s.id);
+        nameField.setAttribute("class", "name-step-field");
         nameField.setAttribute("placeholder", s.name);
         nameField.setAttribute("type", "text");
         name.appendChild(nameField);
