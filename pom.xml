@@ -15,10 +15,15 @@
 	<description>Project 2 for QA-Academy</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>13</java.version>
 	</properties>
 
 	<dependencies>
+	    <dependency>
+	        <groupId>org.seleniumhq.selenium</groupId>
+	        <artifactId>selenium-java</artifactId>
+	        <version>3.141.59</version>
+    	</dependency>	
 		<dependency>
 	 		<groupId>org.modelmapper</groupId>
 	 		<artifactId>modelmapper</artifactId>
