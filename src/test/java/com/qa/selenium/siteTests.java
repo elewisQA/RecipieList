@@ -2,6 +2,7 @@ package com.qa.selenium;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.AfterEach;
 //---[ Imports ]---
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ public class siteTests {
 	}
 	
 	@Test
-	void renameTest() throws InterruptedException {
+	void renameRecipeTest() {
 		// Set-up Test Resources
 		driver.get(this.url);
 		String name = "Battenburg";
@@ -60,5 +61,41 @@ public class siteTests {
 		
 		// Test Assertion
 		assertThat(title.getAttribute("innerHTML").equals(name));
+	}
+	
+	@Test
+	void renameIngredientTest() {
+		// Set-up Test Resources
+		driver.get(this.url);
+		String name = "Rye-Flour";
+	
+		// Click 'Edit' Button for first recipe
+		this.wait = new WebDriverWait(driver,10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("editRecipe-1")));
+		this.driver.findElement(By.id("editRecipe-1")).click();
+		
+		// Rename
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("ingredient-name-1")));
+		WebElement field = this.driver.findElement(By.id("ingredient-name-1"));
+		field.sendKeys(name);
+		
+		// Click 'Save'
+		this.driver.findElement(By.id("isave-1"))
+		.click();
+
+		// Check Rename After Refresh
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.id("ingredient-name-1")));
+		WebElement savedName = this.driver.findElement(By.id("ingredient-name-1"));
+		
+		// Test Assertion
+		assertThat(savedName.getAttribute("innerHTML").equals(name));
+	}
+	
+	@AfterEach
+	void tearDown() {
+		driver.quit();
 	}
 }
