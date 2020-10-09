@@ -18,6 +18,7 @@ fetch('http://localhost:1337/recipe/read')
             // Add an 'Add' button
             let addButton = document.createElement("a");
             addButton.setAttribute("class", "btn btn-primary");
+            addButton.setAttribute("id", "add-button");
             addButton.setAttribute("href", "#");
             addButton.innerHTML = "Add";
             addButton.onclick = function() {

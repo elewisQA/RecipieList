@@ -99,8 +99,8 @@ public class siteTests {
 		
 		// Click 'Add' Button
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.className("btn btn-primary")));
-		this.driver.findElement(By.className("btn btn-primary")).click(); // Click It
+				By.id("add-button")));
+		this.driver.findElement(By.id("add-button")).click(); // Click It
 		
 		// Wait for reload
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -246,7 +246,7 @@ public class siteTests {
 		
 		// Wait for page-reload
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.className("ingredient-name-field")));
+				By.xpath("//input[@placeholder='" + name + "']")));
 		
 		// Get new element
 		WebElement newNameField = driver.findElement(By.xpath("//input[@placeholder='" + name + "']"));
@@ -340,7 +340,7 @@ public class siteTests {
 		List<WebElement> beforeNames = driver.findElements(By.className("step-name-field"));
 		
 		// Click Delete
-		driver.findElement(By.id("sdel-2")).click();
+		driver.findElement(By.id("sdel-3")).click();
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.id("sdel-1")));
@@ -383,7 +383,7 @@ public class siteTests {
 		
 		// Wait for page-reload
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.className("name-step-field")));
+				By.xpath("//input[@placeholder='" + name + "']")));
 		
 		// Get new element
 		WebElement newNameField = driver.findElement(By.xpath("//input[@placeholder='" + name + "']"));

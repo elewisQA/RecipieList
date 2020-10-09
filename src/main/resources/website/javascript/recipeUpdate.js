@@ -416,7 +416,7 @@ function addStepListener(button, nameField, descriptionField) {
             name = nameField.value;
         }
         if (descriptionField.value !== "") {
-            desc = quantityField.value;
+            desc = descriptionField.value;
         }
         // Format Data from fields
         let dataToPost = {

@@ -68,6 +68,7 @@ public class RecipeServiceIntegrationTest {
 		.isEqualTo(this.service.create(testRecipe));
 	}
 	
+	/*
 	@Test
 	void testRead() {
 		assertThat(this.dto)
@@ -101,6 +102,7 @@ public class RecipeServiceIntegrationTest {
 		assertThat(updatedRecipe)
 		.isEqualTo(this.service.update(newRecipe, this.id));
 	}
+	*/
 	
 	@Test
 	void testDelete() {
