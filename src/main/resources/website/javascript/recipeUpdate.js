@@ -94,7 +94,7 @@ function buildIngredientsTable() {
         let unit = document.createElement("td");
         let unitField = document.createElement("input");
         unitField.setAttribute("class", "unit-field");
-        unitField.setAttribute("id", "id-" + i.id);
+        unitField.setAttribute("id", "unit-" + i.id);
         unitField.setAttribute("placeholder", i.unit);
         unitField.setAttribute("type", "text");
         unit.appendChild(unitField);
