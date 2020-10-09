@@ -44,7 +44,5 @@ public class Recipe {
 	// Name-only Constructor
 	public Recipe(String name) {
 		setName(name);
-		setIngredients(new ArrayList<>());
-		setSteps(new ArrayList<>());
 	}
 }

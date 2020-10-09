@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.recipeLists.dto.IngredientDTO;
@@ -22,7 +23,6 @@ import com.qa.recipeLists.service.IngredientService;
 
 //---[ Controller Definition ]---
 @RestController
-@CrossOrigin
 @RequestMapping("/ingredient") // Map to '/Ingredient' destination of URL
 public class IngredientController {
 	
@@ -55,6 +55,9 @@ public class IngredientController {
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<IngredientDTO> update(@PathVariable Long id, @RequestBody IngredientDTO dto) {
+		System.out.println("H\nH\nH");
+		System.out.println("ID: " + id);
+		System.out.println("Obj: " + dto.toString());
 		return new ResponseEntity<>(this.service.update(dto, id), HttpStatus.ACCEPTED);
 	}
 

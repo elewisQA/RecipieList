@@ -2,6 +2,7 @@ package com.qa.recipeLists.service;
 
 //---[ Imports ]---
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -69,23 +70,20 @@ public class RecipeServiceUnitTest {
 		this.emptyRecipe = new Recipe();
 		
 		// Create Recipe DTO using Recipe with Id
-		this.dto = new ModelMapper().map(testRecipeId, RecipeDTO.class);
+		this.dto =  this.mapToDTO(testRecipeId);
 	}
 	
 	@Test
 	void createTest() {
 		// Set-up testing conditions
-		when(this.modelMapper.map(mapToDTO(testRecipe), Recipe.class))
-		.thenReturn(testRecipe);
+		when(this.repo.save(this.testRecipe))
+		.thenReturn(this.testRecipeId);
 		
-		when(this.repo.save(testRecipe))
-		.thenReturn(testRecipeId);
+		when(this.modelMapper.map(this.testRecipeId, RecipeDTO.class))
+		.thenReturn(this.dto);
 		
-		when(this.modelMapper.map(testRecipeId, RecipeDTO.class))
-		.thenReturn(dto);
-		
-		// Test assertion
-		assertThat(this.dto).isEqualTo(this.service.create(testRecipe));
+		// Test Assertion
+		assertThat(this.dto).isEqualTo(this.service.create(this.testRecipe));
 		
 		// Check methods were called
 		verify(this.repo, times(1)).save(this.testRecipe);

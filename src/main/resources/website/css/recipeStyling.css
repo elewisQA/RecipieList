@@ -1,13 +1,19 @@
+body {
+    background-image: url("../media/chipz.jpg");
+    background-repeat: no-repeat, repeat;
+    background-color: rgb(153, 153, 102);
+    background-size: cover;
+}
 div > h1 {
     text-align: center;
 }
 
 h3 {
-    color: yellow;
+    color: rgb(179, 0, 0);
 }
 
 h4 {
-    color: blue;
+    color: rgb(13, 13, 13);
     text-align: center;
 }
 
@@ -19,15 +25,13 @@ div#footer {
     background-color: red;
 }
 
-div#content-container {
-    background-color: fuchsia;
-    margin: auto;
-    width: 85%;
-    padding: 10px;
+div#super-container {
+    background-color: rgb(77, 0, 31);
 }
 
 div.recipe-container {
-    background-color: lime;
-    margin: 10px;
+    background-color:rgb(242, 242, 242);
+    margin: 20px;
     padding: 10px;
+    border-radius: 5px;
 }

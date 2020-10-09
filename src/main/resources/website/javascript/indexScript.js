@@ -10,12 +10,25 @@ fetch('http://localhost:1337/recipe/read')
 
         //---[ Process Data ]---
         response.json().then(function(recipeData) {
-            let page = document.querySelector("div#content-container");
+            let page = document.querySelector("div#super-container");
             //let data = Object.keys(recipeData[0]); // Don't need headers?
             for(let recipe of recipeData) {
                 page.appendChild(createRecipe(recipe));
             }
-
+            // Add an 'Add' button
+            let addButton = document.createElement("a");
+            addButton.setAttribute("class", "btn btn-primary");
+            addButton.setAttribute("id", "add-button");
+            addButton.setAttribute("href", "#");
+            addButton.innerHTML = "Add";
+            addButton.onclick = function() {
+                addRecipe();
+            }
+            page.appendChild(addButton);
+            // Add spacing to the bottom of the page
+            let br = document.createElement("br");
+            page.appendChild(br);
+            page.appendChild(br);
         });
     }
     //---[ Handle Errors ]---
@@ -48,7 +61,7 @@ function createRecipe(recipe) {
     let editButton = document.createElement("a");
     editButton.setAttribute("class", "btn btn-warning");
     editButton.setAttribute("id", "editRecipe-" + id);
-    editButton.setAttribute("href", "recipeUpdate.html/" + id);
+    editButton.setAttribute("href", "recipeUpdate.html?id=" + id);
     editButton.innerHTML = "Edit";
     let delButton  = document.createElement("a");
     delButton.setAttribute("class", "btn btn-danger");
@@ -129,20 +142,6 @@ function createIngredients(ingredientCol, ingredients) {
         let name = document.createElement("td");
         let qty = document.createElement("td");
         let unit = document.createElement("td");
-        // Button bits
-        let edit = document.createElement("td");
-        let editButton = document.createElement("a");
-        editButton.setAttribute("class", "btn btn-warning");
-        editButton.setAttribute("href", "ingredientUpdate.html/" + i.id);
-        editButton.innerHTML = "Edit";
-        edit.appendChild(editButton);
-        let del = document.createElement("td");
-        let delButton = document.createElement("a");
-        delButton.setAttribute("class", "btn btn-danger");
-        delButton.setAttribute("href", "#");
-        delButton.innerHTML = "Delete";
-        deleteListener(delButton, 'ingredient', i.id)
-        del.appendChild(delButton);
 
         // Populate with data
         name.innerHTML = i.name;
@@ -153,8 +152,6 @@ function createIngredients(ingredientCol, ingredients) {
         row.appendChild(name);
         row.appendChild(qty);
         row.appendChild(unit);
-        row.appendChild(edit);
-        row.appendChild(del);
         tableBody.appendChild(row);
     }
 
@@ -194,20 +191,6 @@ function createSteps(stepCol, steps) {
         let row = tableBody.insertRow();
         let name = document.createElement("td");
         let desc = document.createElement("td");
-        // Button bits
-        let edit = document.createElement("td");
-        let editButton = document.createElement("a");
-        editButton.setAttribute("class", "btn btn-warning");
-        editButton.setAttribute("href", "stepUpdate.html/" + i.id);
-        editButton.innerHTML = "Edit";
-        edit.appendChild(editButton);
-        let del = document.createElement("td");
-        let delButton = document.createElement("a");
-        delButton.setAttribute("class", "btn btn-danger");
-        delButton.setAttribute("href", "#");
-        delButton.innerHTML = "Delete";
-        deleteListener(delButton, 'step', i.id)
-        del.appendChild(delButton);
 
         // Populate with data
         name.innerHTML = i.name;
@@ -216,8 +199,6 @@ function createSteps(stepCol, steps) {
         // Add to the table row
         row.appendChild(name);
         row.appendChild(desc);
-        row.appendChild(edit);
-        row.appendChild(del);
         tableBody.appendChild(row);
     }
 
@@ -228,26 +209,29 @@ function createSteps(stepCol, steps) {
     return stepCol
 }
 
-function deleteListener(button, type, id) {
-    button.onclick = function() {
-        let url = "http://localhost:1337/" + type + "/delete/" + id;
-        fetch(url, {
-        method: 'delete',
-        headers: {
-            "Content-type": "application/json"
-        },
-    })
-    .then(function(data) {
-        console.log("Delete request succeeded with response: " + data);
-        //alert("Deleted");
-        location.reload();
-        return;
-    })
-    .catch(function(error) {
-        console.log("Delete request failed: " + error);
-        alert("Gee Whizz Batman!\nI can't delete that!");
-        location.reload();
-        return;
-    })
+function addRecipe() {
+    let postURL = "http://localhost:1337/recipe/create";
+    // New Data to Send
+    dataToPost = {
+        "name": "New Recipe",
+        "ingredients": [],
+        "steps": []
     }
+    
+    // Sent POST request
+    fetch(postURL, {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json",
+        },
+        body:json = JSON.stringify(dataToPost)
+    })
+    .then(JSON)
+    .then(function (response) {
+        location.reload();
+    })
+    .catch(function (err) {
+        console.log("Request failed: ", err);
+    })
 }
+
