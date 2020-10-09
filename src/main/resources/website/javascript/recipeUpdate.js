@@ -206,7 +206,7 @@ function addIngredientRow() {
     // Add 'Add' Button
     let add = document.createElement("a");
     add.setAttribute("class", "btn btn-warning");
-    add.setAttribute("id", "add-add");
+    add.setAttribute("id", "add-ingredient-button");
     add.setAttribute("href", "#");
     add.innerHTML = "Add";
     addIngredientListener(add, nameField, qtyField, unitField);
@@ -249,6 +249,7 @@ function addStepRow() {
     // Add 'Add' Button
     let add = document.createElement("a");
     add.setAttribute("class", "btn btn-warning");
+    add.setAttribute("id", "add-step-button");
     add.setAttribute("href", "#");
     add.innerHTML = "Add";
     addStepListener(add, nameField, descField);
@@ -314,14 +315,28 @@ function updateIngredientListener(button, nameField, quantityField, unitField, i
     }
 }
 
-function addIngredientListener(button, name, quantity, unit) {
+function addIngredientListener(button, nameField, quantityField, unitField) {
     let createURL = "http://localhost:1337/ingredient/create";
     button.onclick = function() {
-        // Format Data from fields
+        // Set values with placeholder data grabbed from original fetch
+        let name = nameField.getAttribute("placeholder");
+        let qty = quantityField.getAttribute("placeholder");
+        let unit = unitField.getAttribute("placeholder");
+        
+        // Check if user has entered values, if so - replace
+        if (nameField.value !== "") { 
+            name = nameField.value;
+        }
+        if (quantityField.value !== "") {
+             qty = quantityField.value;
+        }
+        if (unitField.value !== "") {
+            unit = unitField.value;
+        }
         let dataToPost = {
-            "name": name.innerHTML,
-            "unit": unit.innerHTML,
-            "quantity": parseFloat(quantity.innerHTML)
+            "name": name,
+            "unit": unit,
+            "quantity": parseFloat(qty)
         }
 
         // Send Create Request
@@ -389,13 +404,24 @@ function updateStepListener(button, nameField, descriptionField, id) {
 }
 
 
-function addStepListener(button, name, description) {
+function addStepListener(button, nameField, descriptionField) {
     let createURL = "http://localhost:1337/step/create";
     button.onclick = function() {
+        // Set values with placeholder data grabbed from original fetch
+        let name = nameField.getAttribute("placeholder");
+        let desc = descriptionField.getAttribute("placeholder");
+                
+        // Check if user has entered values, if so - replace
+        if (nameField.value !== "") { 
+            name = nameField.value;
+        }
+        if (descriptionField.value !== "") {
+            desc = quantityField.value;
+        }
         // Format Data from fields
         let dataToPost = {
-            "name": name.innerHTML,
-            "description": description.innerHTML,
+            "name": name,
+            "description": desc
         }
 
         // Send Create Request
