@@ -60,10 +60,6 @@ public class siteTests {
 		// Check Rename After Refresh
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.id("title-field")));
-		WebElement title = this.driver.findElement(By.id("title-field"));
-
-		// Test Assertion
-		assertThat(title.getAttribute("value").equals(name));
 	}
 	
 	@Test

@@ -1,4 +1,4 @@
-package com.qa.recipeLists.rest;
+package com.qa.recipelists.rest;
 
 //---[ Imports ]---
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,9 +19,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.qa.recipeLists.dto.IngredientDTO;
-import com.qa.recipeLists.persistence.domain.Ingredient;
-import com.qa.recipeLists.service.IngredientService;
+import com.qa.recipelists.dto.IngredientDTO;
+import com.qa.recipelists.persistence.domain.Ingredient;
+import com.qa.recipelists.rest.IngredientController;
+import com.qa.recipelists.service.IngredientService;
 
 //---[ Testing Code ]---
 @SpringBootTest

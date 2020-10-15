@@ -1,4 +1,4 @@
-package com.qa.recipeLists.rest;
+package com.qa.recipelists.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -18,9 +18,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qa.recipeLists.dto.StepDTO;
-import com.qa.recipeLists.persistence.domain.Step;
-import com.qa.recipeLists.persistence.repository.StepRepo;
+import com.qa.recipelists.dto.StepDTO;
+import com.qa.recipelists.persistence.domain.Step;
+import com.qa.recipelists.persistence.repository.StepRepo;
 
 //---[ Testing Code ]---
 @SpringBootTest
