@@ -30,11 +30,7 @@ public class RecipeService {
 		this.mapper = mapper;
 	}
 	
-	//--[ Service Methods ]--
-	private Recipe mapFromDTO(RecipeDTO recipeDTO) {
-		return this.mapper.map(recipeDTO, Recipe.class);
-	}
-	
+	//--[ Service Methods ]--	
 	private RecipeDTO mapToDTO(Recipe recipe) {
 		return this.mapper.map(recipe, RecipeDTO.class);
 	}
@@ -42,8 +38,7 @@ public class RecipeService {
 	// CRUD Methods
 	public RecipeDTO create(Recipe recipe) {
 		Recipe created = this.repo.save(recipe);
-		//return this.mapToDTO(created);
-		return this.mapToDTO(recipe);
+		return this.mapToDTO(created);
 	}
 	
 	public List<RecipeDTO> read() {	// Read-All Method
@@ -54,8 +49,7 @@ public class RecipeService {
 	public RecipeDTO read(Long id) { // Read-by-id Method
 		Recipe found = this.repo.findById(id)
 				.orElseThrow(RecipeNotFoundException::new);
-		RecipeDTO mapped = this.mapToDTO(found);
-		return mapped;
+		return this.mapToDTO(found);
 	}
 	
 	public RecipeDTO update(RecipeDTO dto, Long id) {
