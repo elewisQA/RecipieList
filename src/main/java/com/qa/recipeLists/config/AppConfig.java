@@ -1,5 +1,6 @@
-package com.qa.recipeLists.config;
+package com.qa.recipelists.config;
 
+//---[ Imports ]---
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+//---[ Application Configuration ]---
 @Configuration
 @Profile({ "dev", "prod" })
 public class AppConfig {

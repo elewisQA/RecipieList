@@ -1,4 +1,4 @@
-package com.qa.recipeLists.utils;
+package com.qa.recipelists.utils;
 
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
@@ -13,12 +13,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
-import com.qa.recipeLists.dto.IngredientDTO;
-import com.qa.recipeLists.dto.RecipeDTO;
-import com.qa.recipeLists.dto.StepDTO;
-import com.qa.recipeLists.persistence.domain.Ingredient;
-import com.qa.recipeLists.persistence.domain.Recipe;
-import com.qa.recipeLists.persistence.domain.Step;
+import com.qa.recipelists.dto.IngredientDTO;
+import com.qa.recipelists.dto.RecipeDTO;
+import com.qa.recipelists.dto.StepDTO;
+import com.qa.recipelists.persistence.domain.Ingredient;
+import com.qa.recipelists.persistence.domain.Recipe;
+import com.qa.recipelists.persistence.domain.Step;
 
 public class RecipeListsUtils {
 	private static ModelMapper mapper;

@@ -1,5 +1,6 @@
-package com.qa.recipeLists.dto;
+package com.qa.recipelists.dto;
 
+//---[ Imports ]---
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
