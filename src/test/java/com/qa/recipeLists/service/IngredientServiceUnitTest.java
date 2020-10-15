@@ -24,7 +24,7 @@ import com.qa.recipelists.service.IngredientService;
 
 //---[ Testing Code ]---
 @SpringBootTest
-public class IngredientServiceUnitTest {
+class IngredientServiceUnitTest {
 
 	//--[ Test Resources ]--
 	@Autowired

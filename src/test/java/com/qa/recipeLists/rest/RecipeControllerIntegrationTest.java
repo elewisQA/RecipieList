@@ -25,7 +25,7 @@ import com.qa.recipelists.persistence.repository.RecipeRepo;
 //---[ Testing Code ]---
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RecipeControllerIntegrationTest {
+class RecipeControllerIntegrationTest {
 
 	//--[ Test Resources ]--
 	@Autowired 
