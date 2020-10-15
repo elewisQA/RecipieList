@@ -1,4 +1,4 @@
-package com.qa.recipeLists;
+package com.qa.recipelists;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

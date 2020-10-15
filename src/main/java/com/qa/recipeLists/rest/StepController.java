@@ -1,4 +1,4 @@
-package com.qa.recipeLists.rest;
+package com.qa.recipelists.rest;
 
 //---[ Imports ]---
 import java.util.List;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.recipeLists.dto.StepDTO;
-import com.qa.recipeLists.persistence.domain.Step;
-import com.qa.recipeLists.service.StepService;
+import com.qa.recipelists.dto.StepDTO;
+import com.qa.recipelists.persistence.domain.Step;
+import com.qa.recipelists.service.StepService;
 
 //---[ Controller Definition ]---
 @RestController

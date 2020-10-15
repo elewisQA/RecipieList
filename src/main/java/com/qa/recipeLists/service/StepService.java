@@ -1,4 +1,4 @@
-package com.qa.recipeLists.service;
+package com.qa.recipelists.service;
 
 //---[ Imports ]---
 import java.util.List;
@@ -8,11 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.qa.recipeLists.dto.StepDTO;
-import com.qa.recipeLists.exception.StepNotFoundException;
-import com.qa.recipeLists.persistence.domain.Step;
-import com.qa.recipeLists.persistence.repository.StepRepo;
-import com.qa.recipeLists.utils.RecipeListsUtils;
+import com.qa.recipelists.dto.StepDTO;
+import com.qa.recipelists.exception.StepNotFoundException;
+import com.qa.recipelists.persistence.domain.Step;
+import com.qa.recipelists.persistence.repository.StepRepo;
+import com.qa.recipelists.utils.RecipeListsUtils;
 
 //---[ Service Definition ]---
 @Service

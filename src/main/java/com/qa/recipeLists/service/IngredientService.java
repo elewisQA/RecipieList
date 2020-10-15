@@ -1,4 +1,4 @@
-package com.qa.recipeLists.service;
+package com.qa.recipelists.service;
 
 //---[ Imports ]---
 import java.util.List;
@@ -8,11 +8,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.qa.recipeLists.dto.IngredientDTO;
-import com.qa.recipeLists.exception.IngredientNotFoundException;
-import com.qa.recipeLists.persistence.domain.Ingredient;
-import com.qa.recipeLists.persistence.repository.IngredientRepo;
-import com.qa.recipeLists.utils.RecipeListsUtils;
+import com.qa.recipelists.dto.IngredientDTO;
+import com.qa.recipelists.exception.IngredientNotFoundException;
+import com.qa.recipelists.persistence.domain.Ingredient;
+import com.qa.recipelists.persistence.repository.IngredientRepo;
+import com.qa.recipelists.utils.RecipeListsUtils;
 
 //---[ Service Definition ]---
 @Service

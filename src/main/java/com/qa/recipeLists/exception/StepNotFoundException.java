@@ -1,4 +1,4 @@
-package com.qa.recipeLists.exception;
+package com.qa.recipelists.exception;
 
 import javax.persistence.EntityNotFoundException;
 

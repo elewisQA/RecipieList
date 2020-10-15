@@ -1,4 +1,4 @@
-package com.qa.recipeLists.persistence.domain;
+package com.qa.recipelists.persistence.domain;
 
 //---[ Imports ]---
 import javax.persistence.Column;

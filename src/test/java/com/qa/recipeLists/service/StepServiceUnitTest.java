@@ -1,4 +1,4 @@
-package com.qa.recipeLists.service;
+package com.qa.recipelists.service;
 
 //---[ Imports ]---
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,9 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.qa.recipeLists.dto.StepDTO;
-import com.qa.recipeLists.persistence.domain.Step;
-import com.qa.recipeLists.persistence.repository.StepRepo;
+import com.qa.recipelists.dto.StepDTO;
+import com.qa.recipelists.persistence.domain.Step;
+import com.qa.recipelists.persistence.repository.StepRepo;
+import com.qa.recipelists.service.StepService;
 
 //---[ Testing Code ]---
 @SpringBootTest
