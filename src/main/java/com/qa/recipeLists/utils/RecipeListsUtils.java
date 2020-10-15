@@ -1,12 +1,11 @@
 package com.qa.recipelists.utils;
 
+//--[ Imports ]---
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -20,10 +19,9 @@ import com.qa.recipelists.persistence.domain.Ingredient;
 import com.qa.recipelists.persistence.domain.Recipe;
 import com.qa.recipelists.persistence.domain.Step;
 
+//---[ RecipeLists Utilities ]---
 public class RecipeListsUtils {
 	private static ModelMapper mapper;
-
-	public RecipeListsUtils() {}
 	
 	public static void mergeNotNull(Object source, Object target) {
 		BeanUtils.copyProperties(source, target, getNullPropertyNames(source));
@@ -62,22 +60,17 @@ public class RecipeListsUtils {
 	
 	//===[ RECIPE MAPPING ]===
 	public static Recipe mapRecipeFromDTO(RecipeDTO dto, Recipe toUpdate) {
-		System.out.println("New-Name: " + dto.getName() + " Old-Name: " + toUpdate.getName());
-		System.out.println("New-I-Size: " + dto.getIngredients().size() + " Old-I-Size: " + toUpdate.getIngredients().size());
-		System.out.println("New-I-Size: " + dto.getSteps().size() + " Old-I-Size: " + toUpdate.getSteps().size());
 		// Update Name
 		toUpdate.setName(dto.getName());
 		
 		// Loop Through IngredientDTO's and convert to Ingredient's
 		List<Ingredient> ingredients = new ArrayList<>();
 		for(IngredientDTO i : dto.getIngredients()) {
-			System.out.println(i.toString());
 			ingredients.add(mapIngredient(i, toUpdate));
 		}
 		
 		List<Step> steps = new ArrayList<>();
 		for(StepDTO s : dto.getSteps()) {
-			System.out.println(s.toString());
 			steps.add(mapStep(s, toUpdate));
 		}
 		
@@ -98,10 +91,9 @@ public class RecipeListsUtils {
 			steps.add(mapper.map(s, StepDTO.class));
 		}
 		
-		RecipeDTO toReturn = new RecipeDTO(
+		return new RecipeDTO(
 				recipe.getId(), 
 				recipe.getName(), 
 				ingredients, steps);
-		return toReturn;
 	}
 }
