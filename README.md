@@ -56,7 +56,7 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* (Nick Johnson)[https://github.com/nickrstewarttds] - Teaching Java, and my Mentor @ QA 
-* (Vinesh Ghela)[https://github.com/vineshghela] - Teaching Spring
-* (Alan Davies)[https://github.com/MorickClive] -  Teaching Selenium
+* [Nick Johnson](https://github.com/nickrstewarttds) - Teaching Java, and my Mentor @ QA 
+* [Vinesh Ghela](https://github.com/vineshghela) - Teaching Spring
+* [Alan Davies](https://github.com/MorickClive) -  Teaching Selenium
 * Edward Reynolds - Teaching JMeter
