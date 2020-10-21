@@ -19,8 +19,8 @@ Selenium
 SpringBoot 2.x  
 Mockito
 ```
-
-## Running the tests
+## Testing  
+### Running the tests
 
 The integration and JUnit tests should be runnable by any standard Java IDE.  
   
@@ -37,6 +37,10 @@ These test individual parts of the program. As a lot of the program was written 
 These test the API service and controller files.  
 *NOTE:* The Recipe-Service integration test is not complete as I ran out of time to find and fix the problems with it.
 
+### JMeter  
+JMeter test-plan and results can be found under `src/test/resources/JMeter`  
+This includes a load-test and a spike-test.
+
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
@@ -52,6 +56,7 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* **Nick Johnson** - Teaching Java, and my Mentor @ QA
-* **Vinesh Ghela** - Teaching Spring
-* **Alan Davies** -  Teaching Selenium
+* (Nick Johnson)[https://github.com/nickrstewarttds] - Teaching Java, and my Mentor @ QA 
+* (Vinesh Ghela)[https://github.com/vineshghela] - Teaching Spring
+* (Alan Davies)[https://github.com/MorickClive] -  Teaching Selenium
+* Edward Reynolds - Teaching JMeter
