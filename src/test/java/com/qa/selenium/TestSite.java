@@ -1,11 +1,13 @@
 package com.qa.selenium;
 
+//---[ Imports ]---
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
-//---[ Imports ]---
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -17,7 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 //---[ Testing Code ]---
-public class siteTests {
+class TestSite {
 
 	//--[ Testing Variables ]--
 	private ChromeDriver driver;
@@ -84,7 +86,7 @@ public class siteTests {
 		List<WebElement> afterTitles = this.driver.findElements(By.className("recipe-title"));
 		
 		// Assert - list size difference
-		assertThat(beforeTitles.size() !=  afterTitles.size());
+		assertTrue(beforeTitles.size() !=  afterTitles.size());
 	}
 	
 	@Test
@@ -134,7 +136,7 @@ public class siteTests {
 		WebElement savedName = this.driver.findElement(By.id("ingredient-name-1"));
 
 		// Test Assertion
-		assertThat(savedName.getAttribute("value").equals(name));
+		assertTrue(savedName.getAttribute("value").equals(name));
 	}
 	
 	@Test
@@ -172,9 +174,9 @@ public class siteTests {
 		WebElement updatedUnit = this.driver.findElement(By.id("unit-1"));
 
 		// Test Assertions
-		assertThat(updatedName.getAttribute("value").equals(name));
-		assertThat(updatedQty.getAttribute("value").equals(qty));
-		assertThat(updatedUnit.getAttribute("value").equals(unit));
+		assertTrue(updatedName.getAttribute("value").equals(name));
+		assertTrue(updatedQty.getAttribute("value").equals(qty));
+		assertTrue(updatedUnit.getAttribute("value").equals(unit));
 	}
 	
 	@Test
@@ -203,7 +205,7 @@ public class siteTests {
 		List<WebElement> afterNames = driver.findElements(By.className("ingredient-name-field"));
 		
 		// Assert change in no. elements
-		assertThat(beforeNames.size() != afterNames.size());
+		assertTrue(beforeNames.size() != afterNames.size());
 	}
 	
 	@Test
@@ -246,7 +248,7 @@ public class siteTests {
 		
 		// Get new element
 		WebElement newNameField = driver.findElement(By.xpath("//input[@placeholder='" + name + "']"));
-		assertThat(newNameField.getAttribute("placeholder").contentEquals(name));
+		assertTrue(newNameField.getAttribute("placeholder").equals(name));
 	}
 	
 	//==[ STEP TEST CASES ]==
@@ -278,7 +280,7 @@ public class siteTests {
 		WebElement savedName = this.driver.findElement(By.id("step-name-1"));
 
 		// Test Assertion
-		assertThat(savedName.getAttribute("value").equals(name));
+		assertTrue(savedName.getAttribute("value").equals(name));
 	}
 	
 	@Test
@@ -313,8 +315,8 @@ public class siteTests {
 		WebElement updatedDesc = this.driver.findElement(By.id("description-1"));
 
 		// Test Assertions
-		assertThat(updatedName.getAttribute("value").equals(name));
-		assertThat(updatedDesc.getAttribute("value").equals(desc));
+		assertTrue(updatedName.getAttribute("value").equals(name));
+		assertTrue(updatedDesc.getAttribute("value").equals(desc));
 	}
 	
 	@Test
@@ -343,7 +345,7 @@ public class siteTests {
 		List<WebElement> afterNames = driver.findElements(By.className("step-name-field"));
 		
 		// Assert change in no. elements
-		assertThat(beforeNames.size() != afterNames.size());
+		assertTrue(beforeNames.size() != afterNames.size());
 	}
 	
 	@Test
@@ -383,7 +385,7 @@ public class siteTests {
 		
 		// Get new element
 		WebElement newNameField = driver.findElement(By.xpath("//input[@placeholder='" + name + "']"));
-		assertThat(newNameField.getAttribute("placeholder").contentEquals(name));
+		assertTrue(newNameField.getAttribute("placeholder").equals(name));
 	}
 	
 	//---[ After Each - Kill Driver ]---

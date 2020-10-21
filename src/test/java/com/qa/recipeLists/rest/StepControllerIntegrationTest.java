@@ -25,7 +25,7 @@ import com.qa.recipelists.persistence.repository.StepRepo;
 //---[ Testing Code ]---
 @SpringBootTest
 @AutoConfigureMockMvc
-public class StepControllerIntegrationTest {
+class StepControllerIntegrationTest {
 
 	//--[ Test Resources ]--
 	@Autowired 

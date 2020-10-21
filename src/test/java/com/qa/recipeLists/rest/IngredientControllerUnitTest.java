@@ -21,12 +21,11 @@ import org.springframework.http.ResponseEntity;
 
 import com.qa.recipelists.dto.IngredientDTO;
 import com.qa.recipelists.persistence.domain.Ingredient;
-import com.qa.recipelists.rest.IngredientController;
 import com.qa.recipelists.service.IngredientService;
 
 //---[ Testing Code ]---
 @SpringBootTest
-public class IngredientControllerUnitTest {
+class IngredientControllerUnitTest {
 
 	//--[ Test Resources ]--
 	@Autowired

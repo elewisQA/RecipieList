@@ -31,10 +31,6 @@ public class IngredientService {
 	}
 	
 	//--[ Service Methods ]--
-	private Ingredient mapFromDTO(IngredientDTO ingredientDTO) {
-		return this.mapper.map(ingredientDTO, Ingredient.class);
-	}
-	
 	private IngredientDTO mapToDTO(Ingredient ingredient) {
 		return this.mapper.map(ingredient, IngredientDTO.class);
 	}

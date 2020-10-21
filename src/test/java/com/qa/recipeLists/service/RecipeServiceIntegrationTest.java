@@ -25,7 +25,7 @@ import com.qa.recipelists.utils.RecipeListsUtils;
 
 //---[ Testing Code ]---
 @SpringBootTest
-public class RecipeServiceIntegrationTest {
+class RecipeServiceIntegrationTest {
 	
 	//--[ Test Resources ]--
 	@Autowired

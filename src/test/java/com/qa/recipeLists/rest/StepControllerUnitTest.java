@@ -26,7 +26,7 @@ import com.qa.recipelists.service.StepService;
 
 //---[ Testing Code ]---
 @SpringBootTest
-public class StepControllerUnitTest {
+class StepControllerUnitTest {
 
 	//--[ Test Resources ]--
 	@Autowired
